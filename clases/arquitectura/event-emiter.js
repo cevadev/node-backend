@@ -1,14 +1,14 @@
-// Creamos un Event Emitter
+// Creamos un Event Emitter por medio del modulo de node llamado events
 const EventEmitter = require("events");
 
-// Podemos crear un logger propio
+// Podemos crear un logger propio con el EventEmitter
 class Logger extends EventEmitter {
   // Método execute recibe un callback
-  execute(cb) {
+  execute(callback) {
     console.log("Before");
     // Emitimos un Evento
     this.emit("start");
-    cb();
+    callback();
     // Emitimos otro evento
     this.emit("finish");
     console.log("Afther");
@@ -17,14 +17,14 @@ class Logger extends EventEmitter {
 
 const logger = new Logger();
 
-// Cada vez que ocurra algún evento, hagá algo
+// Cada vez que ocurra el evento start, hagá algo
 logger.on("start", () => console.log("STARTING"));
 // Podemos Suscribirnos al evento multiples veces sin niguna restricción
 logger.on("finish", () => console.log("Finishing"));
 
 logger.on("finish", () => console.log("It's Done"));
 
-// logger.execute(() => console.log("Hello World"));
+//logger.execute(() => console.log("Hello World"));
 
 /*
 Algo muy importante es que si ejecutamos código asincrono, como un setTimeout,
