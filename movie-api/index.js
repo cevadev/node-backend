@@ -6,9 +6,19 @@ const app = express();
 //traemos nuestra configuracion
 const { config } = require('./config/index.js');
 
-//creamos las rutas de nuestra api
+//importamos nuestras rutas
+const moviesApi = require('./routes/movies.js');
 
-//cuando hacemos un request a la app imprimira un hello world
+//invocamos la funcion y pasamos nuestra app de express
+moviesApi(app);
+
+//indicamos el puerto que debe escuchar la app
+app.listen(config.port, () => {
+  console.info(`El servidor esta corriendo en el puerto ${config.port}`);
+});
+
+/**
+ * //cuando hacemos un request a la app imprimira un hello world
 app.get('/', function (request, response) {
   //enviamos un respuesta al cliente
   response.send('Hello world');
@@ -20,8 +30,4 @@ app.get('/json', function (request, response) {
     hello: 'world',
   });
 });
-
-//indicamos el puerto que debe escuchar la app
-app.listen(config.port, () => {
-  console.info(`El servidor esta corriendo en el puerto ${config.port}`);
-});
+ */
