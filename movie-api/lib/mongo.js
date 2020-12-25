@@ -1,19 +1,24 @@
 /**capa de bibliotecas donde creamos la conexion a MongoDB*/
 const { MongoClient, ObjectId } = require('mongodb');
-const { config } = require('../config/index.js');
+const { config } = require('../config');
 
 //encodeURIComponent -> nos garantiza que si tenemos algunos caracteres especiales no tendremos problemas de conectarnos
 const USER = encodeURIComponent(config.dbUser);
 const PASSWORD = encodeURIComponent(config.dbPassword);
 const DB_NAME = encodeURIComponent(config.dbName);
 
-const MONGO_URI = `mongodb+srv://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${DB_NAME}?retryWrites=true&w=majority`;
+//const MONGO_URI = `mongodb+srv://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${DB_NAME}?retryWrites=true&w=majority`;
+const MONGO_URI = `mongodb+srv://${USER}:${PASSWORD}@${config.dbHost}/${DB_NAME}?retryWrites=true&w=majority`;
+//const MONGO_URI = `mongodb+srv://barcvilla:DCJb9mRre9Z4P5gE@cluster0.nldop.mongodb.net/platzivideos_db?retryWrites=true&w=majority`;
 
 //Construimos la libreria de conexion mongo
 class MongoLib {
   constructor() {
     //definimos quien es el cliente
-    this.client = new MongoClient(MONGO_URI, { useNewUrlParser: true });
+    this.client = new MongoClient(MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
     this.dbName = DB_NAME;
   }
 
