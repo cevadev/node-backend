@@ -9,6 +9,11 @@ const { config } = require('./config/index.js');
 //importamos nuestras rutas
 const moviesApi = require('./routes/movies.js');
 
+/**
+ * Agregamos un middleware de Body parser express.json para cuando enviemos en nuestras rutas datos en formato json sepa como leerlo
+ */
+app.use(express.json());
+
 //invocamos la funcion y pasamos nuestra app de express
 moviesApi(app);
 

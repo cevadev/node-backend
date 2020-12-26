@@ -67,7 +67,7 @@ class MongoLib {
   }
 
   //creamos un dato o elemento a nuestra coleccion
-  create(coleccion, data) {
+  create(collection, data) {
     //retornamos la conexion creada previamente (arriba)
     return this.connect()
       .then((db) => {
@@ -97,7 +97,7 @@ class MongoLib {
     //retornamos la conexion creada previamente (arriba)
     return this.connect()
       .then((db) => {
-        return db.coleccion(collection).deleteOne({ _id: ObjectId(id) });
+        return db.collection(collection).deleteOne({ _id: ObjectId(id) });
       })
       .then(() => id); //devolvemos el id como referencia del item que se elimino
   }

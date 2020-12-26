@@ -37,7 +37,7 @@ class MovieService {
 
   //actualizamos los datos de una pelicula
   async updateMovie({ movieId, movie } = {}) {
-    const updateMovieId = await this.mongoDB.create(
+    const updateMovieId = await this.mongoDB.update(
       this.collection,
       movieId,
       movie
@@ -46,14 +46,14 @@ class MovieService {
   }
 
   //actualizacion parcial de una pelicula
-  async partialUpdateMovie() {
-    const updateMovieId = await Promise.resolve(moviesMock[0].id);
+  async partialUpdateMovie({ movieId }) {
+    const updateMovieId = await his.mongoDB.delete(this.collection, movieId);
     return updateMovieId;
   }
 
   //eliminamos una pelicula
-  async deleteMovie() {
-    const deletedMovieId = await Promise.resolve(moviesMock[0].id);
+  async deleteMovie({ movieId }) {
+    const deletedMovieId = await this.mongoDB.delete(this.collection, movieId);
     return deletedMovieId;
   }
 }
