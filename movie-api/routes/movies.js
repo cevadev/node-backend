@@ -32,6 +32,8 @@ function moviesApi(app) {
         //filtramos las movies por unos tags
         tags,
       });
+      //producimos un error para testear el middleware de errores
+      throw new Error('Error getting movies');
 
       // Usamos response, definimos el estatus, que como hablamos con anterioridad va a ser 200 de ok
       // definimos su estructura json
