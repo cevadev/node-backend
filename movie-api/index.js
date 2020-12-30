@@ -13,18 +13,24 @@ const moviesApi = require('./routes/movies.js');
 const {
   logErrors,
   errorHandler,
+  wrapErrors,
 } = require('./utils/middleware/errorHandlers.js');
+
+const notFoundHandler = require('./utils/middleware/notFoundHandler.js');
 
 /**
  * Agregamos un middleware de Body parser express.json para cuando enviemos en nuestras rutas datos en formato json sepa como leerlo
  */
 app.use(express.json());
 
-//invocamos la funcion y pasamos nuestra app de express
+//invocamos la funcion (routes) y pasamos nuestra app de express
 moviesApi(app);
+//capturamos el error 404 si existiese
+app.use(notFoundHandler);
 
 //usamos nuestros middleware de manejo de errors. Los middleware de error siempre deben ir al final de la ruta
 app.use(logErrors);
+app.use(wrapErrors);
 app.use(errorHandler);
 
 //indicamos el puerto que debe escuchar la app
