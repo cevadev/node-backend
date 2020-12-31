@@ -47,9 +47,10 @@ describe('routes - movies', function () {
          */
         assert.deepStrictEqual(res.body, {
           data: moviesMock,
-          message: 'movies listend',
+          //este mensaje debe coincidir con el mensaje que escribimos en routes/movies.js router.get(/)
+          message: 'movies listed',
         });
-        //indicamos que el test finaliza aqui
+        //indicamos que el test finaliza aqui para evitar el timeout
         done();
       });
     });

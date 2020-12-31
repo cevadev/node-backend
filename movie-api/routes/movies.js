@@ -51,7 +51,7 @@ function moviesApi(app) {
       // definimos su estructura json
       res.status(200).json({
         data: movies,
-        message: 'movies listend',
+        message: 'movies listed',
       });
     } catch (error) {
       next(error);
