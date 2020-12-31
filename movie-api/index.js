@@ -12,6 +12,9 @@ const moviesApi = require('./routes/movies.js');
 //llamamos el middleware que habilita CORS
 const cors = require('cors');
 
+//DEBUG
+const debug = require('debug')('app:server');
+
 //importamos nuestro middleware para el manejo de errores
 const {
   logErrors,
@@ -41,7 +44,7 @@ app.use(errorHandler);
 
 //indicamos el puerto que debe escuchar la app
 app.listen(config.port, () => {
-  console.info(`El servidor esta corriendo en el puerto ${config.port}`);
+  debug(`El servidor esta corriendo en el puerto ${config.port}`);
 });
 
 /**
