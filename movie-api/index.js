@@ -9,7 +9,7 @@ const { config } = require('./config/index.js');
 //importamos nuestras rutas
 const moviesApi = require('./routes/movies.js');
 
-//habilitamos el middleware que habilita CORS
+//llamamos el middleware que habilita CORS
 const cors = require('cors');
 
 //importamos nuestro middleware para el manejo de errores
@@ -26,7 +26,7 @@ const notFoundHandler = require('./utils/middleware/notFoundHandler.js');
  */
 app.use(express.json());
 
-//habilitamos CROS para todos los request
+//habilitamos CORS para todos los request
 app.use(cors());
 
 //invocamos la funcion (routes) y pasamos nuestra app de express

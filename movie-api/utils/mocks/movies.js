@@ -1,3 +1,5 @@
+const { func } = require('joi');
+
 const moviesMock = [
   {
     id: '542826c2-edca-4c60-b5df-41ae17769394',
@@ -143,6 +145,28 @@ const moviesMock = [
   },
 ];
 
+//utilidad que nos permite crear peliculas filtradas
+function filteredMoviesMock(tag) {
+  return moviesMock.filter((movie) => movie.tag.includes(tag));
+}
+
+/**
+ * vamos solo hacer test de las rutas, es decir no vamos hacer que lleguen hasta los servicios
+ * hacemos un mock de los servicios -< cada vez que llamemos  a getMovies retornamos una promesa que es el mock de las movies
+ */
+class MovieServiceMock {
+  async getMovies() {
+    return Promise.resolve(moviesMock);
+  }
+
+  //mock del metodo createmovie que retorna la primera movie del movieMock
+  async createMovie() {
+    return Promise.resolve(moviesMock[0]);
+  }
+}
+
 module.exports = {
   moviesMock,
+  filteredMoviesMock,
+  MovieServiceMock,
 };
