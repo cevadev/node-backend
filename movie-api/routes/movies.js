@@ -6,6 +6,14 @@ const joi = require('joi');
 //importamos la capa de servicios
 const MovieService = require('../services/movies.js');
 
+//importamos la utilidad para el cache
+const cacheResponse = require('../utils/cacheResponse.js');
+//importamos los tiempos
+const {
+  FIVE_MINUTES_IN_SECONDS,
+  SIXTY_MINUTES_IN_SECONDS,
+} = require('../utils/times.js');
+
 //importamos los schemas de validacion
 const {
   movieIdSchema,
@@ -34,6 +42,9 @@ function moviesApi(app) {
    más adelante
     */
   router.get('/', async function (req, res, next) {
+    //Agreamos el cache
+    cacheResponse(res, FIVE_MINUTES_IN_SECONDS);
+
     //los tags de las movies viene del query de la url antes el signo de ? (/api/movies/?tags=)
     const { tags } = req.query;
 
@@ -70,6 +81,9 @@ function moviesApi(app) {
     '/:movieId',
     validationHandler(joi.object({ movieId: movieIdSchema }), 'params'),
     async function (req, res, next) {
+      //Agreamos el cache
+      cacheResponse(res, SIXTY_MINUTES_IN_SECONDS);
+
       //el movieId viene como parametro en la url (/api/movies/:movieId)
       const { movieId } = req.params;
 
